@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>lobbyr_nicar</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="lobbyr_NICAR_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lobbyr_NICAR_files/libs/quarto-html/quarto.js"></script>
+<script src="lobbyr_NICAR_files/libs/quarto-html/popper.min.js"></script>
+<script src="lobbyr_NICAR_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="lobbyr_NICAR_files/libs/quarto-html/anchor.min.js"></script>
+<link href="lobbyr_NICAR_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lobbyr_NICAR_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="lobbyr_NICAR_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="lobbyr_NICAR_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="lobbyr_NICAR_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="how-to-use-federal-lobbying-disclosures" class="level1">
+<h1>How to use federal lobbying disclosures?</h1>
+<p>Disclosures identify which lobbyists and organizations are trying to shape specific bills, agencies, and policies, revealing how private interests interact with public officials. ​</p>
+<p>Knowing who is lobbying and on what issues helps the public and media understand the context behind legislative and regulatory decisions. ​</p>
+<p>Here’s some examples:</p>
+<p>Bloomberg(Kate Ackley): <a href="https://news.bloombergtax.com/bloomberg-government-news/ai-lobbying-soars-in-washington-among-big-firms-and-upstarts">AI Lobbying Soars in Washington, Among Big Firms and Upstarts</a></p>
+<p>Bloomberg(me): <a href="https://news.bloombergtax.com/daily-tax-report/tax-prep-gop-aligned-groups-lobby-to-end-irs-direct-file">Tax Prep, GOP-Aligned Groups Lobby to End IRS’ Direct File</a></p>
+<p>Politico: <a href="https://www.politico.com/news/2025/12/08/inside-the-warner-bros-lobbying-bonanza-00682276">Inside the Warner Bros.&nbsp;lobbying bonanza</a></p>
+</section>
+<section id="ways-to-sift-through-and-structure-the-data" class="level1">
+<h1>Ways to sift through and structure the data</h1>
+<p>We can use the LDA site to search for <a href="https://lda.senate.gov/filings/public/filing/search/?registrant=&amp;registrant_country=&amp;registrant_ppb_country=&amp;client=&amp;client_state=&amp;client_country=&amp;client_ppb_country=&amp;house_id=&amp;lobbyist=&amp;lobbyist_covered_position=&amp;lobbyist_conviction_disclosure=&amp;lobbyist_conviction_date_range_from=&amp;lobbyist_conviction_date_range_to=&amp;report_period=&amp;report_year=&amp;report_dt_posted_from=&amp;report_dt_posted_to=&amp;report_amount_reported_min=&amp;report_amount_reported_max=&amp;report_filing_uuid=&amp;report_house_doc_id=&amp;report_issue_area_description=%22Direct+file%22&amp;affiliated_organization=&amp;affiliated_organization_country=&amp;foreign_entity=&amp;foreign_entity_country=&amp;foreign_entity_ppb_country=&amp;foreign_entity_ownership_percentage_min=&amp;foreign_entity_ownership_percentage_max=&amp;search=search#js_searchFormTitle">specific terms</a>, <a href="https://lda.senate.gov/filings/public/filing/search/?registrant=&amp;registrant_country=&amp;registrant_ppb_country=&amp;client=&amp;client_state=&amp;client_country=&amp;client_ppb_country=&amp;house_id=&amp;lobbyist=Bruce+Mehlman&amp;lobbyist_covered_position=&amp;lobbyist_conviction_disclosure=&amp;lobbyist_conviction_date_range_from=&amp;lobbyist_conviction_date_range_to=&amp;report_period=&amp;report_year=&amp;report_dt_posted_from=&amp;report_dt_posted_to=&amp;report_amount_reported_min=&amp;report_amount_reported_max=&amp;report_filing_uuid=&amp;report_house_doc_id=&amp;report_issue_area_description=&amp;affiliated_organization=&amp;affiliated_organization_country=&amp;foreign_entity=&amp;foreign_entity_country=&amp;foreign_entity_ppb_country=&amp;foreign_entity_ownership_percentage_min=&amp;foreign_entity_ownership_percentage_max=&amp;search=search#js_searchFormTitle">specific lobbyists</a>, <a href="https://lda.senate.gov/filings/public/filing/search/?registrant=CHAMBER+OF+COMMERCE+OF+THE+U.S.A.&amp;registrant_country=&amp;registrant_ppb_country=&amp;client=&amp;client_state=&amp;client_country=&amp;client_ppb_country=&amp;house_id=&amp;lobbyist=&amp;lobbyist_covered_position=&amp;lobbyist_conviction_disclosure=&amp;lobbyist_conviction_date_range_from=&amp;lobbyist_conviction_date_range_to=&amp;report_period=&amp;report_year=&amp;report_dt_posted_from=&amp;report_dt_posted_to=&amp;report_amount_reported_min=&amp;report_amount_reported_max=&amp;report_filing_uuid=&amp;report_house_doc_id=&amp;report_issue_area_description=&amp;affiliated_organization=&amp;affiliated_organization_country=&amp;foreign_entity=&amp;foreign_entity_country=&amp;foreign_entity_ppb_country=&amp;foreign_entity_ownership_percentage_min=&amp;foreign_entity_ownership_percentage_max=&amp;search=search#js_searchFormTitle">specific companies/firms/organizations</a>, <a href="https://lda.senate.gov/filings/public/filing/search/?registrant=&amp;registrant_country=&amp;registrant_ppb_country=&amp;client=&amp;client_state=&amp;client_country=&amp;client_ppb_country=&amp;house_id=&amp;lobbyist=&amp;lobbyist_covered_position=&amp;lobbyist_conviction_disclosure=&amp;lobbyist_conviction_date_range_from=&amp;lobbyist_conviction_date_range_to=&amp;report_period=&amp;report_year=&amp;report_dt_posted_from=&amp;report_dt_posted_to=&amp;report_amount_reported_min=&amp;report_amount_reported_max=&amp;report_filing_uuid=&amp;report_house_doc_id=&amp;report_issue_area=TAX&amp;report_issue_area_description=&amp;affiliated_organization=&amp;affiliated_organization_country=&amp;foreign_entity=&amp;foreign_entity_country=&amp;foreign_entity_ppb_country=&amp;foreign_entity_ownership_percentage_min=&amp;foreign_entity_ownership_percentage_max=&amp;search=search">specific topic areas</a> Note: I’m using the Senate’s LDA site, but the House has its own version. They should have the same information.</p>
+<p>We can use google docs functions like <a href="https://docs.google.com/spreadsheets/d/1hn-jwRVPLR2_125uvciQQkr1j4exacUHSj7nQMQ3ejs/edit?usp=sharing">importhtml to try and structure the data</a>.</p>
+<p>But there are limitations-you get throttled at 6,000 results, and the information that can be brought in is limited.</p>
+</section>
+<section id="lobbyr" class="level1">
+<h1>lobbyR</h1>
+<p>The goal of lobbyR is to provide a suite of tools for querying, cleaning, and analyzing U.S. Senate Lobbying Disclosure Act (LDA) data via the official REST API.</p>
+<p>It is designed for journalists, researchers, and transparency advocates who want to explore federal lobbying disclosures in a reproducible and programmatic way.</p>
+<p>The package includes helpers for searching by issue, client, registrant, and date, as well as for flagging duplicates, identifying client-registrant conflicts, and securely storing your API key.</p>
+<section id="installation" class="level3">
+<h3 class="anchored" data-anchor-id="installation">Installation</h3>
+<p>Make sure the following packages are installed on your machine:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pkgs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"httr2"</span>, <span class="st">"dplyr"</span>, <span class="st">"tidyr"</span>, <span class="st">"stringr"</span>, <span class="st">"keyring"</span>, <span class="st">"readr"</span>, <span class="st">"purrr"</span>, <span class="st">"devtools"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">setdiff</span>(pkgs, <span class="fu">rownames</span>(<span class="fu">installed.packages</span>())))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(pkgs, library, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     filter, lag</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Loading required package: usethis</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[1]]</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "httr2"     "stats"     "graphics"  "grDevices" "utils"     "datasets" </span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [7] "methods"   "base"     </span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[2]]</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "dplyr"     "httr2"     "stats"     "graphics"  "grDevices" "utils"    </span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [7] "datasets"  "methods"   "base"     </span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[3]]</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] "tidyr"     "dplyr"     "httr2"     "stats"     "graphics"  "grDevices"</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [7] "utils"     "datasets"  "methods"   "base"     </span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[4]]</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] "stringr"   "tidyr"     "dplyr"     "httr2"     "stats"     "graphics" </span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [7] "grDevices" "utils"     "datasets"  "methods"   "base"     </span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[5]]</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] "keyring"   "stringr"   "tidyr"     "dplyr"     "httr2"     "stats"    </span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [7] "graphics"  "grDevices" "utils"     "datasets"  "methods"   "base"     </span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[6]]</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] "readr"     "keyring"   "stringr"   "tidyr"     "dplyr"     "httr2"    </span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [7] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "methods"  </span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [13] "base"     </span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[7]]</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] "purrr"     "readr"     "keyring"   "stringr"   "tidyr"     "dplyr"    </span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [7] "httr2"     "stats"     "graphics"  "grDevices" "utils"     "datasets" </span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [13] "methods"   "base"     </span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[8]]</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] "devtools"  "usethis"   "purrr"     "readr"     "keyring"   "stringr"  </span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [7] "tidyr"     "dplyr"     "httr2"     "stats"     "graphics"  "grDevices"</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [13] "utils"     "datasets"  "methods"   "base"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can install the development version of lobbyR from <a href="https://github.com/Lobbying-DisclosuRe/lobbyr">GitHub</a>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"Lobbying-DisclosuRe/lobbyr"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Using GitHub PAT from the git credential store.</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Skipping install of 'lobbyR' from a github remote, the SHA1 (0cd5cf80) has not changed since last install.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Use `force = TRUE` to force installation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="click-this-to-watch-a-video-that-walks-you-through-the-example" class="level2">
+<h2 class="anchored" data-anchor-id="click-this-to-watch-a-video-that-walks-you-through-the-example"><a href="https://www.loom.com/share/7b96e863438b4d8fb220739b868c48aa?sid=a93a57dd-c82a-4472-97fd-5c50ddc163ee">Click this to watch a video that walks you through the example</a></h2>
+</section>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<p>This is a basic example which shows you how to solve a common problem:</p>
+<p>Here is <a href="https://lda.senate.gov/filings/public/filing/search/?registrant=&amp;registrant_country=&amp;registrant_ppb_country=&amp;client=7+eleven&amp;client_state=&amp;client_country=&amp;client_ppb_country=&amp;house_id=&amp;lobbyist=&amp;lobbyist_covered_position=&amp;lobbyist_conviction_disclosure=&amp;lobbyist_conviction_date_range_from=&amp;lobbyist_conviction_date_range_to=&amp;report_period=&amp;report_year=&amp;report_dt_posted_from=&amp;report_dt_posted_to=&amp;report_amount_reported_min=&amp;report_amount_reported_max=&amp;report_filing_uuid=&amp;report_house_doc_id=&amp;report_issue_area_description=&amp;affiliated_organization=&amp;affiliated_organization_country=&amp;foreign_entity=&amp;foreign_entity_country=&amp;foreign_entity_ppb_country=&amp;foreign_entity_ownership_percentage_min=&amp;foreign_entity_ownership_percentage_max=&amp;search=search#js_searchFormTitle">the visual representation</a> of what you’re looking at if you were to search the Senate LDA website -</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load lobbyR</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lobbyR)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set your API key (you'll be prompted to enter it securely)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="cn">FALSE</span>) { <span class="co"># \dontrun{</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># just doing this so it doesn't run</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_senate_api_key</span>()</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>} <span class="co"># }</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Query filings for tax, company, or bill issues in the first quarter for a specific client/registrant</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>seven_eleven_filings <span class="ot">&lt;-</span> <span class="fu">get_filings</span>(</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">issues =</span> <span class="fu">c</span>(<span class="st">"fees"</span>, <span class="st">"foods"</span>, <span class="st">"immigration"</span>),</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">issue_joiner =</span> <span class="st">"or"</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">client_name =</span> <span class="st">"7 Eleven, Inc."</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">ending_date =</span> <span class="st">"2025-1-25"</span>, <span class="co"># format yyyy-mm-dd</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">starting_date =</span> <span class="st">"2020-04-01"</span>, <span class="co"># format yyyy-mm-dd</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">tidy_result =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">ignore_disclaimer =</span> <span class="cn">FALSE</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; iterating ■■■■■■■■■                         25% | ETA:  4s</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; iterating ■■■■■■■■■■■■■■■■                  50% | ETA:  2s</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; iterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DISCLAIMER: This data is known to contain errors and requires additional filtering and cleaning to ensure correct results.</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; See documentation for more guidance and filtering examples.</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; FACT CHECKING:</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; +If you're looking to fact-check, use the filing document url to look at the source of the information as it was filed.</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; +Ensure that there is only one filing for a given registrant in each filing_period for each year to avoid double counting the amount spent or earned on lobbying.</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DOUBLE COUNTING:</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; If, for example, in the same quarter of a year an entity has a filing called '1st Quarter - Report', '1st Quarter - Termination' and '1st Quarter - Amendment', you must make sure to only count one of those (the latest is usually the most accurate) otherwise you risk double counting.</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; +The helper column called, 'double count risk' should have insights into some of these instances, but it's not perfect. So, double check.</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; +Registrations and terminations are separate from quarterly lobby spending and must be filtered out to determine an entity's yearly spending on lobbying.</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; MORE HELPFUL HINTS:</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; +If an entity name appears as a registrant, but also appears as a client. Do not sum the values. Instead, use the value in the registrant's expenses field to gauge the amount spent on lobbying by the registrant.</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SOURCE: Federal lobbying disclosures maintained in the U.S. Senate Lobbying Disclosure Act Database and queried through the official Lobbying Disclosure REST API v1 - Read more here - https://lda.senate.gov/api/redoc/v1/</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Flag and clean duplicate filings</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>dupes_flag_test <span class="ot">&lt;-</span> <span class="fu">flag_dupes</span>(</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>  seven_eleven_filings,</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>  <span class="at">find_duplicates =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>  <span class="at">attempt_cleaning =</span> <span class="cn">TRUE</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; This function either removed or identified lobbying filings that, if left in, could lead to doublecounting of spending on lobbying. It is not perfect. Please see documentation on tips for fact-checking these by hand.</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Flag and remove potential double-counting between registrant and client</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>flagged_conflict <span class="ot">&lt;-</span> <span class="fu">flag_client_registrant_conflict</span>(</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>  seven_eleven_filings,</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>  <span class="at">flag_conflict =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>  <span class="at">clean_doublecounts =</span> <span class="cn">TRUE</span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; This function either removed or identified lobbying filings that, if left in, could lead to doublecounting of spending on lobbying. It is not perfect. Please see documentation on tips for fact-checking these by hand.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="a-more-complex-example-to-get-disclosures-ready-for-textual-analysis-or-to-more-simply-eyeball-it-for-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="a-more-complex-example-to-get-disclosures-ready-for-textual-analysis-or-to-more-simply-eyeball-it-for-patterns">A more complex example to get disclosures ready for textual analysis or to more simply eyeball it for patterns</h2>
+<p>Remember it’s on lobbyists to divulge what and who they were lobbying – to there’s no exact science. No silver bullet to get every disclosure. The key is to try and find the most common terms. This example already has done some of the</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#take a stab at some terms based on your reporting and then do a quick eyeball of how, what we're looking for, was being defined.</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>sec899_2025 <span class="ot">&lt;-</span> <span class="fu">get_filings</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">issues =</span> <span class="fu">c</span>(<span class="st">"899"</span>, <span class="st">"revenge tax"</span>, <span class="st">"unfair foreign tax"</span>, <span class="st">"Unfair Tax Prevention Act"</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">issue_joiner =</span> <span class="st">"or"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="st">"2025"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">filing_period =</span> <span class="cn">NULL</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">client_name =</span> <span class="cn">NULL</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">tidy_result =</span> F,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">ignore_disclaimer =</span> T</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; iterating ■■■■                              10% | ETA: 16s</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; iterating ■■■■■■■                           20% | ETA: 12s</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; iterating ■■■■■■■■■■■■■■■■                  50% | ETA:  6s</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; iterating ■■■■■■■■■■■■■■■■■■■■■■■■■         80% | ETA:  2s</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; iterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Disclaimer is muted. But you should read it, and can do that by removing ignore_disclaimer = TRUE from DisclosuR call</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">#This function filters out lobbying disclosures that don't mention tax and then simplify it in an easier-to-read format. Then it exports it to a .csv so we can look in excel/google docs</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>what_theyre_saying <span class="ot">&lt;-</span> sec899_2025 <span class="sc">|&gt;</span> </span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Taxation/Internal Revenue Code</span><span class="st">`</span> <span class="sc">!=</span> <span class="st">"NULL"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"registrant.name"</span>, <span class="st">"client.name"</span>, <span class="st">"filing_type_display"</span>, <span class="st">"income"</span>, <span class="st">"expenses"</span>, <span class="st">"filing_year"</span>, <span class="st">"dt_posted"</span>, <span class="st">"filing_document_url"</span>, <span class="st">"registrant.description"</span>, <span class="st">"client.general_description"</span>, <span class="st">"filing_type"</span>, <span class="st">"filing_period"</span>,</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Taxation/Internal Revenue Code"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Taxation/Internal Revenue Code</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">map_chr</span>(<span class="st">`</span><span class="at">Taxation/Internal Revenue Code</span><span class="st">`</span>, <span class="sc">~</span> <span class="fu">str_c</span>(.x, <span class="at">collapse =</span> <span class="st">", "</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(<span class="st">"whattheyresaying.csv"</span>)</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co">#Now that we've honed our terms, Craft the API call to pull down the bills/terms we want to find for the Estes and Smith bills  </span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>sec_899_estes_bill <span class="ot">&lt;-</span> <span class="fu">get_filings</span>(</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">issues =</span> <span class="fu">c</span>(<span class="st">"Unfair Tax Prevention Act"</span>, <span class="st">"(H.R. 2423)"</span>, <span class="st">"H.R.591"</span>, <span class="st">"Defending American Jobs and Investment Act"</span>),</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">issue_joiner =</span> <span class="st">"or"</span>,</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">filing_period =</span> <span class="cn">NULL</span>,</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">client_name =</span> <span class="cn">NULL</span>,</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">ending_date =</span> <span class="st">"2025-07-23"</span>,</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">starting_date =</span> <span class="st">"2023-01-01"</span>,</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">tidy_result =</span> F,</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">ignore_disclaimer =</span> T</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; iterating ■■■■                              11% | ETA: 15s</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; iterating ■■■■■■■■                          22% | ETA: 11s</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; iterating ■■■■■■■■■■■■■■                    44% | ETA:  8s</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; iterating ■■■■■■■■■■■■■■■■■■■■■■■■          78% | ETA:  3s</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; iterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Disclaimer is muted. But you should read it, and can do that by removing ignore_disclaimer = TRUE from DisclosuR call</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="co">#go back through, filter the non-tax disclosures and simplify</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>no_tax_nas <span class="ot">&lt;-</span> sec_899_estes_bill <span class="sc">|&gt;</span> </span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Taxation/Internal Revenue Code</span><span class="st">`</span> <span class="sc">!=</span> <span class="st">"NULL"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"registrant.name"</span>, <span class="st">"client.name"</span>, <span class="st">"filing_type_display"</span>, <span class="st">"income"</span>, <span class="st">"expenses"</span>, <span class="st">"filing_year"</span>, <span class="st">"dt_posted"</span>, <span class="st">"filing_document_url"</span>, <span class="st">"registrant.description"</span>, <span class="st">"client.general_description"</span>, <span class="st">"filing_type"</span>, <span class="st">"filing_period"</span>,</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Taxation/Internal Revenue Code"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Taxation/Internal Revenue Code</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">map_chr</span>(<span class="st">`</span><span class="at">Taxation/Internal Revenue Code</span><span class="st">`</span>, <span class="sc">~</span> <span class="fu">str_c</span>(.x, <span class="at">collapse =</span> <span class="st">", "</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a> <span class="fu">write_csv</span>(<span class="st">"no_tax_nas.csv"</span>)</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="co">#i've written it out to a csv but here's where you can start getting creative with LLM, textual analysis, etc. We just need more than an hour for that :)  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="main-functions" class="level2">
+<h2 class="anchored" data-anchor-id="main-functions">Main Functions</h2>
+<section id="get_filings" class="level3">
+<h3 class="anchored" data-anchor-id="get_filings"><code>get_filings()</code></h3>
+<ul>
+<li>Query the U.S. Senate LDA API for lobbying filings.</li>
+<li>Search by issue(s), client, registrant, filing period, and date range.</li>
+<li>Returns a cleaned and optionally tidied data frame.</li>
+<li>Includes a detailed disclaimer and fact-checking guidance.</li>
+</ul>
+<section id="example-1" class="level4">
+<h4 class="anchored" data-anchor-id="example-1">Example</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>chamber_df <span class="ot">&lt;-</span> <span class="fu">get_filings</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">issues =</span> <span class="fu">c</span>(<span class="st">"tax"</span>, <span class="st">"trade"</span>, <span class="st">"bill"</span>),</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">issue_joiner =</span> <span class="st">"or"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">filing_period =</span> <span class="st">"first_quarter"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">client_name =</span> <span class="st">"Chamber of Commerce of the U.S.A."</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">registrant_name =</span> <span class="st">"Chamber of Commerce of the U.S.A."</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ending_date =</span> <span class="st">"2025-01-25"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">starting_date =</span> <span class="st">"2015-04-01"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">tidy_result =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">ignore_disclaimer =</span> <span class="cn">TRUE</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ⠙ iterating 1 done (0.38/s) | 2.6s</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; iterating ■■■■■■■■■■■■■■                    43% | ETA:  9s</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; iterating ■■■■■■■■■■■■■■■■■■■■■■            71% | ETA:  4s</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; iterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■       86% | ETA:  2s</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; iterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Disclaimer is muted. But you should read it, and can do that by removing ignore_disclaimer = TRUE from DisclosuR call</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="flag_dupes" class="level3">
+<h3 class="anchored" data-anchor-id="flag_dupes"><code>flag_dupes()</code></h3>
+<ul>
+<li>Flags filings that may be duplicates, amendments, or otherwise dubious.</li>
+<li>Adds diagnostic columns to help identify problematic filings.</li>
+<li>Optionally removes all but the latest filing for each registrant-client-quarter group.</li>
+</ul>
+<section id="example-2" class="level4">
+<h4 class="anchored" data-anchor-id="example-2">Example</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dupes_flag_test <span class="ot">&lt;-</span> <span class="fu">flag_dupes</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  chamber_df,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">find_duplicates =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">attempt_cleaning =</span> <span class="cn">TRUE</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; This function either removed or identified lobbying filings that, if left in, could lead to doublecounting of spending on lobbying. It is not perfect. Please see documentation on tips for fact-checking these by hand.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="flag_client_registrant_conflict" class="level3">
+<h3 class="anchored" data-anchor-id="flag_client_registrant_conflict"><code>flag_client_registrant_conflict()</code></h3>
+<ul>
+<li>Flags and (optionally) removes filings that could result in double-counting, such as when an entity files as both registrant and client.</li>
+<li>Adds a flag column indicating which filings are likely to be duplicates.</li>
+</ul>
+<section id="example-3" class="level4">
+<h4 class="anchored" data-anchor-id="example-3">Example</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>flagged_and_clean_conflict <span class="ot">&lt;-</span> <span class="fu">flag_client_registrant_conflict</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  seven_eleven_filings,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">flag_conflict =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">clean_doublecounts =</span> <span class="cn">TRUE</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; This function either removed or identified lobbying filings that, if left in, could lead to doublecounting of spending on lobbying. It is not perfect. Please see documentation on tips for fact-checking these by hand.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="set_senate_api_key" class="level3">
+<h3 class="anchored" data-anchor-id="set_senate_api_key"><code>set_senate_api_key()</code></h3>
+<ul>
+<li>Securely store your U.S. Senate LDA API key using the <code>keyring</code> package.</li>
+<li>Prompts you to enter your key, which is then used by <code>get_filings()</code>.</li>
+</ul>
+<section id="example-4" class="level4">
+<h4 class="anchored" data-anchor-id="example-4">Example</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set_senate_api_key</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+</section>
+</section>
+<section id="data-cleaning-and-best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="data-cleaning-and-best-practices">Data Cleaning and Best Practices</h2>
+<ul>
+<li>Always review flagged filings and potential double-counts by hand for critical analyses. There’s lots of cases that don’t get caught, unfortunately. For instance the 7 Eleven filing was spelled three different ways - “7-ELEVEN, INC”, “7 ELEVEN, INC.” and “7-ELEVEN, INC.”</li>
+<li>Use the <code>checkme</code> and <code>flag</code> columns to guide manual review. But there’s always other cases. Feel free to flag and report them to me.</li>
+<li>Only sum lobbying expenses for a registrant once per quarter/year to avoid double-counting.</li>
+<li>Consult the filing document URL for source verification.</li>
+</ul>
+<hr>
+</section>
+<section id="disclaimer" class="level2">
+<h2 class="anchored" data-anchor-id="disclaimer">Disclaimer</h2>
+<blockquote class="blockquote">
+<p>This data is known to contain errors and requires additional filtering and cleaning to ensure correct results. See documentation for more guidance and filtering examples. If you’re looking to fact-check, use the filing document URL to review the source. Registrations and terminations are separate from quarterly lobby spending and must be filtered out to determine an entity’s yearly spending on lobbying. If an entity appears as both registrant and client, do not sum the values; instead, use the registrant’s expenses field to gauge total lobbying spend.</p>
+</blockquote>
+<hr>
+</section>
+<section id="api-key" class="level2">
+<h2 class="anchored" data-anchor-id="api-key">API Key</h2>
+<ul>
+<li>API keys can be requested at: <a href="https://lda.senate.gov/api/register/" class="uri">https://lda.senate.gov/api/register/</a></li>
+<li>Store your key securely with <code>set_senate_api_key()</code>.</li>
+</ul>
+<hr>
+</section>
+<section id="dependencies" class="level2">
+<h2 class="anchored" data-anchor-id="dependencies">Dependencies</h2>
+<ul>
+<li><code>httr2</code></li>
+<li><code>dplyr</code></li>
+<li><code>tidyr</code></li>
+<li><code>stringr</code></li>
+<li><code>keyring</code></li>
+<li><code>readr</code></li>
+<li><code>purrr</code></li>
+</ul>
+<hr>
+</section>
+<section id="license" class="level2">
+<h2 class="anchored" data-anchor-id="license">License</h2>
+<p>GNU LGPLv3</p>
+<hr>
+</section>
+<section id="contributing" class="level2">
+<h2 class="anchored" data-anchor-id="contributing">Contributing</h2>
+<p>Pull requests and issues are welcome. Please see the repository for guidelines.</p>
+<hr>
+</section>
+<section id="citation" class="level2">
+<h2 class="anchored" data-anchor-id="citation">Citation</h2>
+<p>Working on this still If you use this package in your research or reporting, please cite the data from the U.S. Senate Lobbying Disclosure Act Database and this package.</p>
+<hr>
+</section>
+<section id="contact" class="level2">
+<h2 class="anchored" data-anchor-id="contact">Contact</h2>
+<p>This package was developed by Chris Cioffi. For questions, issues, or suggestions, please visit:</p>
+<hr>
+</section>
+<section id="acknowledgments" class="level2">
+<h2 class="anchored" data-anchor-id="acknowledgments">Acknowledgments</h2>
+<p>Thanks to the U.S. Congress for providing open data and the guidance of American University’s Aarushi Sahejpal. Thanks to AI tools and the R community for help and how-tos in creating some regexes and code patterns.</p>
+<div style="text-align: center">
+
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
