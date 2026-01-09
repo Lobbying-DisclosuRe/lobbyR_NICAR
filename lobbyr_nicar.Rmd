@@ -1,11 +1,11 @@
 ---
-title: "LobbyR Tutorial for NICAR 2026"
-author: "Chris Cioffi"
-date: "`r Sys.Date()`"
+title: "lobbyr NICAR"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r}
+include=FALSE
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 Disclosures identify which lobbyists and organizations are trying to shape specific bills, agencies, and policies, revealing how private interests interact with public officials. ​
 
-Knowing who is lobbying and on what issues helps the public and media understand the context behind legislative and regulatory decisions.
+Knowing who is lobbying and on what issues helps the public and media understand the context behind legislative and regulatory decisions. ​
 
 Here's some examples:
 
@@ -48,7 +48,7 @@ The package includes helpers for searching by issue, client, registrant, and dat
 
 Make sure the following packages are installed on your machine:
 
-```{r message=FALSE}
+```{r installpackages, eval = FALSE}
 pkgs <- c("httr2", "dplyr", "tidyr", "stringr", "keyring", "readr", "purrr", "devtools")
 install.packages(setdiff(pkgs, rownames(installed.packages())))
 lapply(pkgs, library, character.only = TRUE)
@@ -56,7 +56,7 @@ lapply(pkgs, library, character.only = TRUE)
 
 You can install the development version of lobbyR from [GitHub](https://github.com/Lobbying-DisclosuRe/lobbyr):
 
-```{r}
+```{r installlobbyr, eval = FALSE}
 devtools::install_github("Lobbying-DisclosuRe/lobbyr")
 ```
 
@@ -68,8 +68,7 @@ This is a basic example which shows you how to solve a common problem:
 
 Here is [the visual representation](https://lda.senate.gov/filings/public/filing/search/?registrant=&registrant_country=&registrant_ppb_country=&client=7+eleven&client_state=&client_country=&client_ppb_country=&house_id=&lobbyist=&lobbyist_covered_position=&lobbyist_conviction_disclosure=&lobbyist_conviction_date_range_from=&lobbyist_conviction_date_range_to=&report_period=&report_year=&report_dt_posted_from=&report_dt_posted_to=&report_amount_reported_min=&report_amount_reported_max=&report_filing_uuid=&report_house_doc_id=&report_issue_area_description=&affiliated_organization=&affiliated_organization_country=&foreign_entity=&foreign_entity_country=&foreign_entity_ppb_country=&foreign_entity_ownership_percentage_min=&foreign_entity_ownership_percentage_max=&search=search#js_searchFormTitle) of what you're looking at if you were to search the Senate LDA website -
 
-```{r}
-#| label: fullexample
+```{r fullexample, eval = FALSE}
 
 #load lobbyR
 library(lobbyR)
@@ -111,7 +110,7 @@ flagged_conflict <- flag_client_registrant_conflict(
 
 Remember it's on lobbyists to divulge what and who they were lobbying – to there's no exact science. No silver bullet to get every disclosure. The key is to try and find the most common terms. This example already has done some of the
 
-```{r}
+```{r complexexample, eval = FALSE}
 #take a stab at some terms based on your reporting and then do a quick eyeball of how, what we're looking for, was being defined.
 
 sec899_2025 <- get_filings(
@@ -170,8 +169,7 @@ no_tax_nas <- sec_899_estes_bill |>
 
 #### Example
 
-```{r}
-#| label: get_filings_example
+```{r get_filings_example, eval = FALSE}
 
 chamber_df <- get_filings(
   issues = c("tax", "trade", "bill"),
@@ -194,8 +192,7 @@ chamber_df <- get_filings(
 
 #### Example
 
-```{r}
-#| label: dupes_flag_test_example
+```{r dupes_flag_test_example, eval = FALSE}
 
 dupes_flag_test <- flag_dupes(
   chamber_df,
@@ -211,8 +208,7 @@ dupes_flag_test <- flag_dupes(
 
 #### Example
 
-```{r}
-#| label: flagged_conflict_example
+```{r flagged_conflict_example, eval = FALSE}
 
 flagged_and_clean_conflict <- flag_client_registrant_conflict(
   seven_eleven_filings,
@@ -228,9 +224,7 @@ flagged_and_clean_conflict <- flag_client_registrant_conflict(
 
 #### Example
 
-```{r}
-#| label: set_senate_api_key_example
-#| eval: false
+```{r set_senate_api_key_example, eval = FALSE}
 
 set_senate_api_key()
 ```

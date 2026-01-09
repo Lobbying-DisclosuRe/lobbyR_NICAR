@@ -9,11 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Chris Cioffi" />
 
-<meta name="date" content="2026-01-09" />
 
-<title>LobbyR Tutorial for NICAR 2026</title>
+<title>lobbyr NICAR</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -350,20 +348,26 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">LobbyR Tutorial for NICAR 2026</h1>
-<h4 class="author">Chris Cioffi</h4>
-<h4 class="date">2026-01-09</h4>
+<h1 class="title toc-ignore">lobbyr NICAR</h1>
 
 </div>
 
 
+<pre class="r"><code>include=FALSE
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = &quot;#&gt;&quot;,
+  fig.path = &quot;man/figures/README-&quot;,
+  out.width = &quot;100%&quot;
+)</code></pre>
 <div id="how-to-use-federal-lobbying-disclosures" class="section level1">
 <h1>How to use federal lobbying disclosures?</h1>
 <p>Disclosures identify which lobbyists and organizations are trying to
 shape specific bills, agencies, and policies, revealing how private
 interests interact with public officials. ​</p>
 <p>Knowing who is lobbying and on what issues helps the public and media
-understand the context behind legislative and regulatory decisions.</p>
+understand the context behind legislative and regulatory decisions. ​</p>
 <p>Here’s some examples:</p>
 <p>Bloomberg(Kate Ackley): <a href="https://news.bloombergtax.com/bloomberg-government-news/ai-lobbying-soars-in-washington-among-big-firms-and-upstarts">AI
 Lobbying Soars in Washington, Among Big Firms and Upstarts</a></p>
@@ -401,46 +405,9 @@ client-registrant conflicts, and securely storing your API key.</p>
 <p>Make sure the following packages are installed on your machine:</p>
 <pre class="r"><code>pkgs &lt;- c(&quot;httr2&quot;, &quot;dplyr&quot;, &quot;tidyr&quot;, &quot;stringr&quot;, &quot;keyring&quot;, &quot;readr&quot;, &quot;purrr&quot;, &quot;devtools&quot;)
 install.packages(setdiff(pkgs, rownames(installed.packages())))
-lapply(pkgs, library, character.only = TRUE)
-#&gt; [[1]]
-#&gt; [1] &quot;httr2&quot;     &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot; &quot;utils&quot;     &quot;datasets&quot; 
-#&gt; [7] &quot;methods&quot;   &quot;base&quot;     
-#&gt; 
-#&gt; [[2]]
-#&gt; [1] &quot;dplyr&quot;     &quot;httr2&quot;     &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot; &quot;utils&quot;    
-#&gt; [7] &quot;datasets&quot;  &quot;methods&quot;   &quot;base&quot;     
-#&gt; 
-#&gt; [[3]]
-#&gt;  [1] &quot;tidyr&quot;     &quot;dplyr&quot;     &quot;httr2&quot;     &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot;
-#&gt;  [7] &quot;utils&quot;     &quot;datasets&quot;  &quot;methods&quot;   &quot;base&quot;     
-#&gt; 
-#&gt; [[4]]
-#&gt;  [1] &quot;stringr&quot;   &quot;tidyr&quot;     &quot;dplyr&quot;     &quot;httr2&quot;     &quot;stats&quot;     &quot;graphics&quot; 
-#&gt;  [7] &quot;grDevices&quot; &quot;utils&quot;     &quot;datasets&quot;  &quot;methods&quot;   &quot;base&quot;     
-#&gt; 
-#&gt; [[5]]
-#&gt;  [1] &quot;keyring&quot;   &quot;stringr&quot;   &quot;tidyr&quot;     &quot;dplyr&quot;     &quot;httr2&quot;     &quot;stats&quot;    
-#&gt;  [7] &quot;graphics&quot;  &quot;grDevices&quot; &quot;utils&quot;     &quot;datasets&quot;  &quot;methods&quot;   &quot;base&quot;     
-#&gt; 
-#&gt; [[6]]
-#&gt;  [1] &quot;readr&quot;     &quot;keyring&quot;   &quot;stringr&quot;   &quot;tidyr&quot;     &quot;dplyr&quot;     &quot;httr2&quot;    
-#&gt;  [7] &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot; &quot;utils&quot;     &quot;datasets&quot;  &quot;methods&quot;  
-#&gt; [13] &quot;base&quot;     
-#&gt; 
-#&gt; [[7]]
-#&gt;  [1] &quot;purrr&quot;     &quot;readr&quot;     &quot;keyring&quot;   &quot;stringr&quot;   &quot;tidyr&quot;     &quot;dplyr&quot;    
-#&gt;  [7] &quot;httr2&quot;     &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot; &quot;utils&quot;     &quot;datasets&quot; 
-#&gt; [13] &quot;methods&quot;   &quot;base&quot;     
-#&gt; 
-#&gt; [[8]]
-#&gt;  [1] &quot;devtools&quot;  &quot;usethis&quot;   &quot;purrr&quot;     &quot;readr&quot;     &quot;keyring&quot;   &quot;stringr&quot;  
-#&gt;  [7] &quot;tidyr&quot;     &quot;dplyr&quot;     &quot;httr2&quot;     &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot;
-#&gt; [13] &quot;utils&quot;     &quot;datasets&quot;  &quot;methods&quot;   &quot;base&quot;</code></pre>
+lapply(pkgs, library, character.only = TRUE)</code></pre>
 <p>You can install the development version of lobbyR from <a href="https://github.com/Lobbying-DisclosuRe/lobbyr">GitHub</a>:</p>
-<pre class="r"><code>devtools::install_github(&quot;Lobbying-DisclosuRe/lobbyr&quot;)
-#&gt; Using GitHub PAT from the git credential store.
-#&gt; Skipping install of &#39;lobbyR&#39; from a github remote, the SHA1 (0cd5cf80) has not changed since last install.
-#&gt;   Use `force = TRUE` to force installation</code></pre>
+<pre class="r"><code>devtools::install_github(&quot;Lobbying-DisclosuRe/lobbyr&quot;)</code></pre>
 </div>
 <div id="click-this-to-watch-a-video-that-walks-you-through-the-example" class="section level2">
 <h2><a href="https://www.loom.com/share/7b96e863438b4d8fb220739b868c48aa?sid=a93a57dd-c82a-4472-97fd-5c50ddc163ee">Click
@@ -453,7 +420,8 @@ problem:</p>
 <p>Here is <a href="https://lda.senate.gov/filings/public/filing/search/?registrant=&amp;registrant_country=&amp;registrant_ppb_country=&amp;client=7+eleven&amp;client_state=&amp;client_country=&amp;client_ppb_country=&amp;house_id=&amp;lobbyist=&amp;lobbyist_covered_position=&amp;lobbyist_conviction_disclosure=&amp;lobbyist_conviction_date_range_from=&amp;lobbyist_conviction_date_range_to=&amp;report_period=&amp;report_year=&amp;report_dt_posted_from=&amp;report_dt_posted_to=&amp;report_amount_reported_min=&amp;report_amount_reported_max=&amp;report_filing_uuid=&amp;report_house_doc_id=&amp;report_issue_area_description=&amp;affiliated_organization=&amp;affiliated_organization_country=&amp;foreign_entity=&amp;foreign_entity_country=&amp;foreign_entity_ppb_country=&amp;foreign_entity_ownership_percentage_min=&amp;foreign_entity_ownership_percentage_max=&amp;search=search#js_searchFormTitle">the
 visual representation</a> of what you’re looking at if you were to
 search the Senate LDA website -</p>
-<pre class="r"><code>#load lobbyR
+<pre class="r"><code>
+#load lobbyR
 library(lobbyR)
 
 # Set your API key (you&#39;ll be prompted to enter it securely)
@@ -473,29 +441,6 @@ seven_eleven_filings &lt;- get_filings(
   tidy_result = TRUE,
   ignore_disclaimer = FALSE
 )
-#&gt; iterating ■■■■■■■■■                         25% | ETA:  3siterating ■■■■■■■■■■■■■■■■                  50% | ETA:  2siterating ■■■■■■■■■■■■■■■■■■■■■■■           75% | ETA:  1s                                                           DISCLAIMER: This data is known to contain errors and requires additional filtering and cleaning to ensure correct results.
-#&gt; 
-#&gt; See documentation for more guidance and filtering examples.
-#&gt; 
-#&gt; FACT CHECKING:
-#&gt; 
-#&gt; +If you&#39;re looking to fact-check, use the filing document url to look at the source of the information as it was filed.
-#&gt; 
-#&gt; +Ensure that there is only one filing for a given registrant in each filing_period for each year to avoid double counting the amount spent or earned on lobbying.
-#&gt; 
-#&gt; DOUBLE COUNTING:
-#&gt; 
-#&gt; If, for example, in the same quarter of a year an entity has a filing called &#39;1st Quarter - Report&#39;, &#39;1st Quarter - Termination&#39; and &#39;1st Quarter - Amendment&#39;, you must make sure to only count one of those (the latest is usually the most accurate) otherwise you risk double counting.
-#&gt; 
-#&gt; +The helper column called, &#39;double count risk&#39; should have insights into some of these instances, but it&#39;s not perfect. So, double check.
-#&gt; 
-#&gt; +Registrations and terminations are separate from quarterly lobby spending and must be filtered out to determine an entity&#39;s yearly spending on lobbying.
-#&gt; 
-#&gt; MORE HELPFUL HINTS:
-#&gt; 
-#&gt; +If an entity name appears as a registrant, but also appears as a client. Do not sum the values. Instead, use the value in the registrant&#39;s expenses field to gauge the amount spent on lobbying by the registrant.
-#&gt; 
-#&gt; SOURCE: Federal lobbying disclosures maintained in the U.S. Senate Lobbying Disclosure Act Database and queried through the official Lobbying Disclosure REST API v1 - Read more here - https://lda.senate.gov/api/redoc/v1/
 
 # Flag and clean duplicate filings
 dupes_flag_test &lt;- flag_dupes(
@@ -503,15 +448,13 @@ dupes_flag_test &lt;- flag_dupes(
   find_duplicates = TRUE,
   attempt_cleaning = TRUE
 )
-#&gt; This function either removed or identified lobbying filings that, if left in, could lead to doublecounting of spending on lobbying. It is not perfect. Please see documentation on tips for fact-checking these by hand.
 
 # Flag and remove potential double-counting between registrant and client
 flagged_conflict &lt;- flag_client_registrant_conflict(
   seven_eleven_filings,
   flag_conflict = TRUE,
   clean_doublecounts = TRUE
-)
-#&gt; This function either removed or identified lobbying filings that, if left in, could lead to doublecounting of spending on lobbying. It is not perfect. Please see documentation on tips for fact-checking these by hand.</code></pre>
+)</code></pre>
 </div>
 <div id="a-more-complex-example-to-get-disclosures-ready-for-textual-analysis-or-to-more-simply-eyeball-it-for-patterns" class="section level2">
 <h2>A more complex example to get disclosures ready for textual analysis
@@ -531,7 +474,6 @@ sec899_2025 &lt;- get_filings(
   tidy_result = F,
   ignore_disclaimer = T
 ) 
-#&gt; iterating ■■■■■■■                           20% | ETA:  7siterating ■■■■■■■■■■                        30% | ETA:  7siterating ■■■■■■■■■■■■■                     40% | ETA:  6siterating ■■■■■■■■■■■■■■■■                  50% | ETA:  5siterating ■■■■■■■■■■■■■■■■■■■               60% | ETA:  4siterating ■■■■■■■■■■■■■■■■■■■■■■            70% | ETA:  3siterating ■■■■■■■■■■■■■■■■■■■■■■■■■         80% | ETA:  2siterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      90% | ETA:  1s                                                           Disclaimer is muted. But you should read it, and can do that by removing ignore_disclaimer = TRUE from DisclosuR call
 
 #This function filters out lobbying disclosures that don&#39;t mention tax and then simplify it in an easier-to-read format. Then it exports it to a .csv so we can look in excel/google docs
 
@@ -553,7 +495,6 @@ sec_899_estes_bill &lt;- get_filings(
   tidy_result = F,
   ignore_disclaimer = T
 )
-#&gt; iterating ■■■■                              11% | ETA:  9siterating ■■■■■■■■                          22% | ETA:  8siterating ■■■■■■■■■■■                       33% | ETA:  7siterating ■■■■■■■■■■■■■■                    44% | ETA:  6siterating ■■■■■■■■■■■■■■■■■■                56% | ETA:  5siterating ■■■■■■■■■■■■■■■■■■■■■             67% | ETA:  3siterating ■■■■■■■■■■■■■■■■■■■■■■■■          78% | ETA:  2siterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      89% | ETA:  1s                                                           Disclaimer is muted. But you should read it, and can do that by removing ignore_disclaimer = TRUE from DisclosuR call
 
 #go back through, filter the non-tax disclosures and simplify
 
@@ -580,7 +521,8 @@ range.</li>
 </ul>
 <div id="example-1" class="section level4">
 <h4>Example</h4>
-<pre class="r"><code>chamber_df &lt;- get_filings(
+<pre class="r"><code>
+chamber_df &lt;- get_filings(
   issues = c(&quot;tax&quot;, &quot;trade&quot;, &quot;bill&quot;),
   issue_joiner = &quot;or&quot;,
   filing_period = &quot;first_quarter&quot;,
@@ -590,8 +532,7 @@ range.</li>
   starting_date = &quot;2015-04-01&quot;,
   tidy_result = TRUE,
   ignore_disclaimer = TRUE
-)
-#&gt; ⠙ iterating 1 done (0.3/s) | 3.3siterating ■■■■■                             14% | ETA: 22siterating ■■■■■■■■■■                        29% | ETA: 16siterating ■■■■■■■■■■■■■■                    43% | ETA: 12siterating ■■■■■■■■■■■■■■■■■■                57% | ETA:  9siterating ■■■■■■■■■■■■■■■■■■■■■■            71% | ETA:  6siterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■       86% | ETA:  3s                                                           Disclaimer is muted. But you should read it, and can do that by removing ignore_disclaimer = TRUE from DisclosuR call</code></pre>
+)</code></pre>
 </div>
 </div>
 <div id="flag_dupes" class="section level3">
@@ -605,12 +546,12 @@ registrant-client-quarter group.</li>
 </ul>
 <div id="example-2" class="section level4">
 <h4>Example</h4>
-<pre class="r"><code>dupes_flag_test &lt;- flag_dupes(
+<pre class="r"><code>
+dupes_flag_test &lt;- flag_dupes(
   chamber_df,
   find_duplicates = TRUE,
   attempt_cleaning = TRUE
-)
-#&gt; This function either removed or identified lobbying filings that, if left in, could lead to doublecounting of spending on lobbying. It is not perfect. Please see documentation on tips for fact-checking these by hand.</code></pre>
+)</code></pre>
 </div>
 </div>
 <div id="flag_client_registrant_conflict" class="section level3">
@@ -624,12 +565,12 @@ duplicates.</li>
 </ul>
 <div id="example-3" class="section level4">
 <h4>Example</h4>
-<pre class="r"><code>flagged_and_clean_conflict &lt;- flag_client_registrant_conflict(
+<pre class="r"><code>
+flagged_and_clean_conflict &lt;- flag_client_registrant_conflict(
   seven_eleven_filings,
   flag_conflict = TRUE,
   clean_doublecounts = TRUE
-)
-#&gt; This function either removed or identified lobbying filings that, if left in, could lead to doublecounting of spending on lobbying. It is not perfect. Please see documentation on tips for fact-checking these by hand.</code></pre>
+)</code></pre>
 </div>
 </div>
 <div id="set_senate_api_key" class="section level3">
@@ -642,7 +583,8 @@ duplicates.</li>
 </ul>
 <div id="example-4" class="section level4">
 <h4>Example</h4>
-<pre class="r"><code>set_senate_api_key()</code></pre>
+<pre class="r"><code>
+set_senate_api_key()</code></pre>
 <hr />
 </div>
 </div>
