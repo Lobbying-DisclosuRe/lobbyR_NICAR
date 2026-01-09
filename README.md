@@ -1,4 +1,4 @@
-lobbyr NICAR
+lobbyR @ NICAR 2026
 ================
 
 ``` r
