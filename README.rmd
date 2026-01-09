@@ -48,7 +48,7 @@ The package includes helpers for searching by issue, client, registrant, and dat
 
 Make sure the following packages are installed on your machine:
 
-```{r installpackages, eval = FALSE}
+```{r installpackages, eval = FALSE, }
 pkgs <- c("httr2", "dplyr", "tidyr", "stringr", "keyring", "readr", "purrr", "devtools")
 install.packages(setdiff(pkgs, rownames(installed.packages())))
 lapply(pkgs, library, character.only = TRUE)
@@ -60,15 +60,19 @@ You can install the development version of lobbyR from [GitHub](https://github.c
 devtools::install_github("Lobbying-DisclosuRe/lobbyr")
 ```
 
-## [Click this to watch a video that walks you through the example](https://www.loom.com/share/7b96e863438b4d8fb220739b868c48aa?sid=a93a57dd-c82a-4472-97fd-5c50ddc163ee)
++----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| # VIDEO: [Watch me talk through the basic example](https://www.loom.com/share/7b96e863438b4d8fb220739b868c48aa?sid=a93a57dd-c82a-4472-97fd-5c50ddc163ee) |
++----------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-## Example
+# Basic Example:
 
-This is a basic example which shows you how to solve a common problem:
+#### This is a basic example which shows you how to solve a common problem where you want to see what issues a company/entity lobbied on and how much they spent over time.
 
 Here is [the visual representation](https://lda.senate.gov/filings/public/filing/search/?registrant=&registrant_country=&registrant_ppb_country=&client=7+eleven&client_state=&client_country=&client_ppb_country=&house_id=&lobbyist=&lobbyist_covered_position=&lobbyist_conviction_disclosure=&lobbyist_conviction_date_range_from=&lobbyist_conviction_date_range_to=&report_period=&report_year=&report_dt_posted_from=&report_dt_posted_to=&report_amount_reported_min=&report_amount_reported_max=&report_filing_uuid=&report_house_doc_id=&report_issue_area_description=&affiliated_organization=&affiliated_organization_country=&foreign_entity=&foreign_entity_country=&foreign_entity_ppb_country=&foreign_entity_ownership_percentage_min=&foreign_entity_ownership_percentage_max=&search=search#js_searchFormTitle) of what you're looking at if you were to search the Senate LDA website -
 
-```{r fullexample, eval = FALSE}
+#### Get things ready
+
+```{r basicexample1, eval=FALSE}
 
 #load lobbyR
 library(lobbyR)
@@ -80,7 +84,13 @@ if (FALSE) { # \dontrun{
   set_senate_api_key()
 } # }
 
-# Query filings for tax, company, or bill issues in the first quarter for a specific client/registrant
+```
+
+#### Query filings for tax, company, or bill issues in the first quarter for a specific client/registrant.
+
+Learn more about what kinds of things you can search for by looking at the [get_filings()] documentation.
+
+```{r basicexample2, eval=FALSE}
 seven_eleven_filings <- get_filings(
   issues = c("fees", "foods", "immigration"),
   issue_joiner = "or",
@@ -90,15 +100,42 @@ seven_eleven_filings <- get_filings(
   tidy_result = TRUE,
   ignore_disclaimer = FALSE
 )
+```
 
-# Flag and clean duplicate filings
+------------------------------------------------------------------------
+
+## Data Cleaning and Best Practices
+
+-   Always review flagged filings and potential double-counts by hand for critical analyses. There's lots of cases that don't get caught, unfortunately. For instance the 7 Eleven filing was spelled three different ways - "7-ELEVEN, INC", "7 ELEVEN, INC." and "7-ELEVEN, INC."
+-   Use the `checkme` and `flag` columns to guide manual review. But there's always other cases. Feel free to flag and report them to me.
+-   Only sum lobbying expenses for a registrant once per quarter/year to avoid double-counting.
+-   Consult the filing document URL for source verification.
+
+------------------------------------------------------------------------
+
+## Important Reminder/Disclaimer
+
+> This data is known to contain errors and requires additional filtering and cleaning to ensure correct results. See documentation for more guidance and filtering examples. If you're looking to fact-check, use the filing document URL to review the source. Registrations and terminations are separate from quarterly lobby spending and must be filtered out to determine an entity's yearly spending on lobbying. If an entity appears as both registrant and client, do not sum the values; instead, use the registrant's expenses field to gauge total lobbying spend.
+
+------------------------------------------------------------------------
+
+#### Flag and clean duplicate filings
+
+See [flag_dupes()] for an explainer on what red flags you might be looking for. [My video](https://www.loom.com/share/7b96e863438b4d8fb220739b868c48aa?sid=a93a57dd-c82a-4472-97fd-5c50ddc163ee) also goes over a few common ones.
+
+```{r basicexample3, eval=FALSE}
 dupes_flag_test <- flag_dupes(
   seven_eleven_filings,
   find_duplicates = TRUE,
   attempt_cleaning = TRUE
 )
+```
 
-# Flag and remove potential double-counting between registrant and client
+#### Flag and remove potential double-counting between registrant and client
+
+See [flag_client_registrant_conflict()] for an explainer on what red flags you might be looking for. [My video](https://www.loom.com/share/7b96e863438b4d8fb220739b868c48aa?sid=a93a57dd-c82a-4472-97fd-5c50ddc163ee) also goes over a few common ones.
+
+```{r basicexample4, eval=FALSE}
 flagged_conflict <- flag_client_registrant_conflict(
   seven_eleven_filings,
   flag_conflict = TRUE,
@@ -106,13 +143,17 @@ flagged_conflict <- flag_client_registrant_conflict(
 )
 ```
 
-## A more complex example to get disclosures ready for textual analysis or to more simply eyeball it for patterns
+# A more complex example:
 
-Remember it's on lobbyists to divulge what and who they were lobbying – to there's no exact science. No silver bullet to get every disclosure. The key is to try and find the most common terms. This example already has done some of the
+### Get disclosures ready for textual analysis
 
-```{r complexexample, eval = FALSE}
-#take a stab at some terms based on your reporting and then do a quick eyeball of how, what we're looking for, was being defined.
+Remember it's on lobbyists to accurately attest what and who they were lobbying on – to there's no exact science. No silver bullet to get every disclosure. The key is to try and find the most common terms. This example already has done some of the
 
+#### Use your reporting to guide you
+
+Take a stab at some terms based on your reporting and then do a quick eyeball of how, what we're looking for, was being defined. Here I started with some terms for the 'revenge tax' or section 899.
+
+```{r complexexample1, eval = FALSE}
 sec899_2025 <- get_filings(
   issues = c("899", "revenge tax", "unfair foreign tax", "Unfair Tax Prevention Act"),
   issue_joiner = "or",
@@ -122,17 +163,28 @@ sec899_2025 <- get_filings(
   tidy_result = F,
   ignore_disclaimer = T
 ) 
+```
 
-#This function filters out lobbying disclosures that don't mention tax and then simplify it in an easier-to-read format. Then it exports it to a .csv so we can look in excel/google docs
+#### Filter out red herrings
 
+Take out lobbying disclosures that don't mention these terms in the tax section in case the terms are being used in a different context. Then simplify it into an easier-to-read format (the df we pulled has lots of columns we don't need) before exporting it to a .csv so we can look in excel/google docs
+
+NOTE: I've written it out to a csv but here's where you can start getting creative with LLM, textual analysis, etc. We just need more than an hour for that :)
+
+```{r complexexample2, eval = FALSE}
 what_theyre_saying <- sec899_2025 |> 
   filter(`Taxation/Internal Revenue Code` != "NULL") |> 
   select("registrant.name", "client.name", "filing_type_display", "income", "expenses", "filing_year", "dt_posted", "filing_document_url", "registrant.description", "client.general_description", "filing_type", "filing_period",
   "Taxation/Internal Revenue Code") |> 
   mutate(`Taxation/Internal Revenue Code` = map_chr(`Taxation/Internal Revenue Code`, ~ str_c(.x, collapse = ", "))) |> 
   write_csv("whattheyresaying.csv")
+```
 
-#Now that we've honed our terms, Craft the API call to pull down the bills/terms we want to find for the Estes and Smith bills  
+#### Get specific!
+
+Now that we've honed our terms, craft the API call to pull down the bills/terms we want to find for the Estes and Smith bills
+
+```{r complexexample3, eval = FALSE}
 sec_899_estes_bill <- get_filings(
   issues = c("Unfair Tax Prevention Act", "(H.R. 2423)", "H.R.591", "Defending American Jobs and Investment Act"),
   issue_joiner = "or",
@@ -143,22 +195,24 @@ sec_899_estes_bill <- get_filings(
   tidy_result = F,
   ignore_disclaimer = T
 )
+```
 
-#go back through, filter the non-tax disclosures and simplify
+#### filter and simplify
 
+Go back through, and again filter the non-tax disclosures and simplify our dataframe
+
+```{r complexexample4, eval = FALSE}
 no_tax_nas <- sec_899_estes_bill |> 
   filter(`Taxation/Internal Revenue Code` != "NULL") |> 
   select("registrant.name", "client.name", "filing_type_display", "income", "expenses", "filing_year", "dt_posted", "filing_document_url", "registrant.description", "client.general_description", "filing_type", "filing_period",
   "Taxation/Internal Revenue Code") |> 
   mutate(`Taxation/Internal Revenue Code` = map_chr(`Taxation/Internal Revenue Code`, ~ str_c(.x, collapse = ", "))) |> 
  write_csv("no_tax_nas.csv")
-
-#i've written it out to a csv but here's where you can start getting creative with LLM, textual analysis, etc. We just need more than an hour for that :)  
-
-
 ```
 
-## Main Functions
+# Main Functions
+
+###here's all the things lobbyR can do
 
 ### `get_filings()`
 
@@ -231,21 +285,6 @@ set_senate_api_key()
 
 ------------------------------------------------------------------------
 
-## Data Cleaning and Best Practices
-
--   Always review flagged filings and potential double-counts by hand for critical analyses. There's lots of cases that don't get caught, unfortunately. For instance the 7 Eleven filing was spelled three different ways - "7-ELEVEN, INC", "7 ELEVEN, INC." and "7-ELEVEN, INC."
--   Use the `checkme` and `flag` columns to guide manual review. But there's always other cases. Feel free to flag and report them to me.
--   Only sum lobbying expenses for a registrant once per quarter/year to avoid double-counting.
--   Consult the filing document URL for source verification.
-
-------------------------------------------------------------------------
-
-## Disclaimer
-
-> This data is known to contain errors and requires additional filtering and cleaning to ensure correct results. See documentation for more guidance and filtering examples. If you're looking to fact-check, use the filing document URL to review the source. Registrations and terminations are separate from quarterly lobby spending and must be filtered out to determine an entity's yearly spending on lobbying. If an entity appears as both registrant and client, do not sum the values; instead, use the registrant's expenses field to gauge total lobbying spend.
-
-------------------------------------------------------------------------
-
 ## API Key
 
 -   API keys can be requested at: <https://lda.senate.gov/api/register/>
@@ -271,27 +310,18 @@ GNU LGPLv3
 
 ------------------------------------------------------------------------
 
-## Contributing
+## Contact/Contribute
 
-Pull requests and issues are welcome. Please see the repository for guidelines.
+I welcome help! This package was developed by Chris Cioffi. For questions, issues, or suggestions, please visit: <https://github.com/Lobbying-DisclosuRe/lobbyr>
 
 ------------------------------------------------------------------------
 
 ## Citation
 
-Working on this still If you use this package in your research or reporting, please cite the data from the U.S. Senate Lobbying Disclosure Act Database and this package.
-
-------------------------------------------------------------------------
-
-## Contact
-
-This package was developed by Chris Cioffi. For questions, issues, or suggestions, please visit:
+If you use this package in your research or reporting, please cite the data as being accessed from the U.S. Senate Lobbying Disclosure Act Database and analyzed by the lobbyR package.
 
 ------------------------------------------------------------------------
 
 ## Acknowledgments
 
 Thanks to the U.S. Congress for providing open data and the guidance of American University's Aarushi Sahejpal. Thanks to AI tools and the R community for help and how-tos in creating some regexes and code patterns.
-
-::: {style="text-align: center"}
-:::
