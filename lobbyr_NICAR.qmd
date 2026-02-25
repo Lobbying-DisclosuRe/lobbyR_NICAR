@@ -63,6 +63,14 @@ You can install the development version of lobbyR from [GitHub](https://github.c
 devtools::install_github("Lobbying-DisclosuRe/lobbyr")
 ```
 
+Or you can download it from CRAN! 
+
+```{r}
+install.packages("lobbyR")
+library(lobbyR)
+```
+
+
 ## [Click this to watch a video that walks you through the example](https://www.loom.com/share/7b96e863438b4d8fb220739b868c48aa?sid=a93a57dd-c82a-4472-97fd-5c50ddc163ee)
 
 ## Example
@@ -237,6 +245,12 @@ flagged_and_clean_conflict <- flag_client_registrant_conflict(
 
 set_senate_api_key()
 ```
+
+### SHINY APP 
+
+I've also created a shiny app that you can tinker with that largely replicates the Senate's LDA page but does it in a way that's a little easier to parse. And I've built in many functions from the package into the app itself.
+
+You can find that here 
 
 ------------------------------------------------------------------------
 
