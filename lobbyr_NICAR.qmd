@@ -49,6 +49,19 @@ The package includes helpers for searching by issue, client, registrant, and dat
 
 ### Installation
 
+You can install the development version of lobbyR from [GitHub](https://github.com/Lobbying-DisclosuRe/lobbyr):
+
+```{r}
+devtools::install_github("Lobbying-DisclosuRe/lobbyr")
+```
+
+Or you can download it from CRAN!
+
+```{r}
+install.packages("lobbyR")
+library(lobbyR)
+```
+
 Make sure the following packages are installed on your machine:
 
 ```{r}
@@ -56,20 +69,6 @@ pkgs <- c("httr2", "dplyr", "tidyr", "stringr", "keyring", "readr", "purrr", "de
 install.packages(setdiff(pkgs, rownames(installed.packages())))
 lapply(pkgs, library, character.only = TRUE)
 ```
-
-You can install the development version of lobbyR from [GitHub](https://github.com/Lobbying-DisclosuRe/lobbyr):
-
-```{r}
-devtools::install_github("Lobbying-DisclosuRe/lobbyr")
-```
-
-Or you can download it from CRAN! 
-
-```{r}
-install.packages("lobbyR")
-library(lobbyR)
-```
-
 
 ## [Click this to watch a video that walks you through the example](https://www.loom.com/share/7b96e863438b4d8fb220739b868c48aa?sid=a93a57dd-c82a-4472-97fd-5c50ddc163ee)
 
@@ -246,11 +245,11 @@ flagged_and_clean_conflict <- flag_client_registrant_conflict(
 set_senate_api_key()
 ```
 
-### SHINY APP 
+### SHINY APP
 
 I've also created a shiny app that you can tinker with that largely replicates the Senate's LDA page but does it in a way that's a little easier to parse. And I've built in many functions from the package into the app itself.
 
-You can find that here 
+You can find that here
 
 ------------------------------------------------------------------------
 
@@ -315,6 +314,5 @@ This package was developed by Chris Cioffi. For questions, issues, or suggestion
 ## Acknowledgments
 
 Thanks to the U.S. Congress for providing open data and the guidance of American University's Aarushi Sahejpal. Thanks to AI tools and the R community for help and how-tos in creating some regexes and code patterns.
-
 ::: {style="text-align: center"}
 :::
