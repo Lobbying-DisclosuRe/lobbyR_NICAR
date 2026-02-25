@@ -13,9 +13,9 @@ knitr::opts_chunk$set(
 
 # How to use federal lobbying disclosures?
 
-Disclosures identify which lobbyists and organizations are trying to shape specific bills, agencies, and policies, revealing how private interests interact with public officials. ​
+Disclosures identify which lobbyists and organizations are trying to shape specific bills, agencies, and policies, revealing how private interests interact with public officials.
 
-Knowing who is lobbying and on what issues helps the public and media understand the context behind legislative and regulatory decisions. ​
+Knowing who is lobbying and on what issues helps the public and media understand the context behind legislative and regulatory decisions.
 
 Here's some examples:
 
@@ -243,7 +243,148 @@ set_senate_api_key()
 
 I've also created a shiny app that you can tinker with that largely replicates the Senate's LDA page but does it in a way that's a little easier to parse. And I've built in many functions from the package into the app itself.
 
-You can find that here
+[You can find that here](https://github.com/Lobbying-DisclosuRe/lobbyR_NICAR/blob/main/lobby_r_app.R)
+
+### MORE HELPFUL THINGS
+
+A function using get fillings to iterate through a series of dates in order to create a complete picture of all lobbying disclosures for a given year, month or other specified time period.
+
+```{r}
+library(lobbyR)
+library(tidyverse)
+
+
+# - Saves each successful day's data to a temp file
+# - Skips days with no data (doesn't create empty files)
+# - Combines all files at the end
+# - Cleans up temp files after combining
+# - Returns NULL if no data was retrieved for any day
+
+get_all_filings <- function(start_date = "2025-01-01", end_date =  format(Sys.Date(), "%Y-%m-%d")) {
+#  format yyyy-mm-dd
+  dates <- seq(as.Date(start_date), as.Date(end_date), by = "day")
+  
+  # Create temp directory
+  temp_dir <- tempdir()
+  
+  # Get filings for each day and save to temp file
+  walk(dates, function(date) {
+    result <- tryCatch({
+      get_filings(
+        # year = as.character(year(date)),  # Extract year from date
+        starting_date = as.character(date - 1),  # One day earlier
+        ending_date = as.character(date),
+        tidy_result = FALSE,
+        ignore_disclaimer = TRUE
+      )
+    }, error = function(e) {
+      message(paste("No data for:", date - 1, "to", date))
+      return(NULL)
+    })
+    
+    # Save only if we got data
+    if (!is.null(result)) {
+      filename <- file.path(temp_dir, paste0("filings_", date, ".rds"))
+      saveRDS(result, filename)
+      message(paste("Saved data for:", date - 1, "to", date))
+    }
+  })
+  
+  # Read all temp files and combine
+  temp_files <- list.files(temp_dir, pattern = "filings_.*\\.rds$", full.names = TRUE)
+  
+  if (length(temp_files) > 0) {
+    all_data <- map_dfr(temp_files, readRDS)
+    
+    # Clean up temp files
+    file.remove(temp_files)
+    
+    return(all_data)
+  } else {
+    message("No data retrieved for any dates")
+    return(NULL)
+  }
+}
+
+
+# Usage #  format yyyy-mm-dd
+
+q1_disclosures <- get_all_filings("2025-01-01", "2025-04-30") 
+q2_disclosures <- get_all_filings("2025-05-01", "2025-08-31")
+q3_disclosures <- get_all_filings("2025-09-01", "2025-12-31")
+q4_disclosures <- get_all_filings("2026-01-01", "2026-02-06")
+new_filings <- get_all_filings("2026-02-06", "2026-02-20")
+#combine the files into a single dataframe 
+
+full_filings <- rbind( q1_disclosures, q2_disclosures, q3_disclosures, q4_disclosures)
+
+updated_full_filings <- rbind (full_filings, new_filings) #merge new query with existing filings to make sure there's no errors
+
+full_filings <- updated_full_filings # write it back into the old file name so the rest of the code works, still 
+
+write_rds(full_filings, "full_filings.rds") #save this 
+
+write_csv(full_filings, "fullfilings.csv")
+
+```
+
+Function selects just the filings that lobbyists have entered text into the issue areas tax and transportation and then filter out all rows that just have null
+
+```{r}
+
+process_lobbying_data <- function(lobbying_df) {
+  lobbying_df |> 
+    select(c("registrant.name", "client.name", "filing_type_display", "income", "expenses", "filing_year", "dt_posted", "filing_document_url", "registrant.description", "client.general_description", "filing_type", "filing_period","Taxation/Internal Revenue Code", "Transportation")) |> 
+    filter(filing_year == 2025) |> 
+filter(`Taxation/Internal Revenue Code` != "NULL" |
+           Transportation != "NULL") |> 
+    mutate(across(everything(), ~as.character(replace(., is.na(.), "NULL")))) |> #turn null into characters 
+  mutate(`Taxation/Internal Revenue Code` = map_chr(`Taxation/Internal Revenue Code`, ~paste(., collapse = ", "))) |>  #turn tax list into a character column 
+ mutate(Transportation = map_chr(Transportation, ~paste(., collapse = ", "))) #turn list of transportation items into a character column
+}
+
+result <- process_lobbying_data(full_filings)
+
+
+write_csv(result, "tax_transpo2025.csv")
+
+```
+
+This function does what I did above, but instead of specifying the column name in the function, you tell the function which the start and end columns. This allows us to run any and all issue areas.
+
+```{r}
+
+
+new_process_lobbying_data <- function(lobbying_df, start_col, end_col) {
+  # Select columns
+  selected_df <- lobbying_df |> 
+    select(c("registrant.name", "client.name", "filing_type_display", "income", "expenses", 
+             "filing_year", "dt_posted", "filing_document_url", "registrant.description", 
+             "client.general_description", "filing_type", "filing_period",
+             all_of(start_col:end_col)))
+  
+  # Get the names of the columns we want to process
+  cols_to_process <- intersect(names(selected_df), names(lobbying_df)[start_col:end_col])
+  
+  # Print information for debugging
+  cat("Total columns after selection:", ncol(selected_df), "\n")
+  cat("Columns to process:", paste(cols_to_process, collapse = ", "), "\n")
+  
+  selected_df |> 
+    filter(if_any(all_of(cols_to_process), ~!is.null(.) & . != "NULL")) |>
+    mutate(across(everything(), ~as.character(replace(., is.na(.), "NULL")))) |>
+    mutate(across(all_of(cols_to_process), 
+                  ~map_chr(., function(x) paste(x, collapse = ", ")),
+                  .names = "processed_{.col}"))
+}
+
+# Usage:
+processed_result <- new_process_lobbying_data(full_filings, 65, 143)
+#takes df, start_column, end_column
+
+write_csv(processed_result, "lobbying_disclosures_for_all_topics.csv")
+
+```
 
 ------------------------------------------------------------------------
 
